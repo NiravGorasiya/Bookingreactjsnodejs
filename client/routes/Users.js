@@ -1,11 +1,11 @@
-const Hotel = require("../model/Hotel");
+const User = require("../model/User");
 
 const router = require("express").Router();
 
 router.post("/add", async (req, res) => {
-    const newHotel = new Hotel(req.body);
+    const newUser = new User(req.body);
     try {
-        const result = await newHotel.save();
+        const result = await newUser.save();
         res.status(201).json(result)
     } catch (error) {
         res.status(500).json(error)
@@ -14,7 +14,7 @@ router.post("/add", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     try {
-        const result = await Hotel.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true });
+        const result = await User.findByIdAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true });
         res.status(201).json(result)
     } catch (error) {
         console.log(error, "df");
@@ -24,8 +24,8 @@ router.put("/:id", async (req, res) => {
 
 router.get("/all", async (req, res, next) => {
     try {
-        const hotel = await Hotel.find();
-        res.status(200).json(hotel)
+        const user = await User.find();
+        res.status(200).json(user)
     } catch (error) {
         res.status(500).json(error)
     }
@@ -33,8 +33,8 @@ router.get("/all", async (req, res, next) => {
 
 router.delete("/:id", async (req, res, next) => {
     try {
-        const hotel = await Hotel.findById(req.params.id);
-        hotel.delete();
+        const user = await User.findById(req.params.id);
+        user.delete();
         res.status(200).json({ msg: "successfull delete" })
     } catch (error) {
         res.status(500).json(error)
