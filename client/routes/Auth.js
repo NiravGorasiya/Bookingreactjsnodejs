@@ -50,8 +50,9 @@ router.post("/login", async (req, res, next) => {
             return res.status(422).json({ success: false, msg: "Invalid credentials" })
         }
         let token = jwt.sign({ id: checkUser._id }, process.env.JWT_SECRET);
-        res.status(200).json({ success: false, result: token, msg: "login successfull" })
+        res.status(200).json({ success: false, result: token, msg: "login successfull", user: checkUser })
     } catch (error) {
+        console.log(error, "error");
         res.status(500).json({ success: false, result: null, msg: error })
     }
 })

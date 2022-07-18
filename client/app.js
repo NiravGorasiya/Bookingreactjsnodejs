@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 
 //Middleware
 app.use(express.json())
-app.use("/api/hotel", hotel)
+app.use("/api/hotels", hotel)
 app.use("/api/user", user)
 app.use("/api/room", room)
 app.use("/api/user", auth)
